@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { title } from 'process';
 
 @Injectable()
 export class SongsService {
@@ -37,6 +38,33 @@ export class SongsService {
   async remove(id: number) {
     return await this.db.song.delete({
       where: { id }
+    });
+  }
+
+  async findFree(){
+    return await this.db.song.findMany({
+      where: { price: 0 }
+    });
+  }
+
+  async findTop(count){
+    return await this.db.song.findMany({
+      orderBy: { rating: 'desc' },
+      take: count
+    });
+  }
+
+  async findPopularArtists(){
+    return await this.db.song.groupBy({
+      by: ['artist'],
+      _count: {
+        title: true
+      },
+      orderBy: {
+        _count: {
+          title: 'desc'
+        }
+      }
     });
   }
 }

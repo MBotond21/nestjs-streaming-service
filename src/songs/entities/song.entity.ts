@@ -3,4 +3,5 @@ export class Song {
     artist: string;
     length: number;
     price: number;
+    rating: number;
 }
