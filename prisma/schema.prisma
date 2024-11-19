@@ -20,4 +20,11 @@ model Song {
   length Int
   price Int
   rating Int
+  playlist Playlist?
+}
+
+model Playlist {
+  name String
+  song Song @relation(fields: [songId], references: [id])
+  songId Int @unique
 }
