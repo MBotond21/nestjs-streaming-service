@@ -22,4 +22,6 @@ export class CreateSongDto {
     @Min(1)
     @Max(5)
     rating: number;
+
+    playlist = null; 
 }
