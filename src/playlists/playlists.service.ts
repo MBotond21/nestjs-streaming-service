@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreatePlaylistDto } from './dto/create-playlist.dto';
 import { UpdatePlaylistDto } from './dto/update-playlist.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { tr } from '@faker-js/faker/.';
 
 @Injectable()
 export class PlaylistsService {
@@ -23,7 +24,10 @@ export class PlaylistsService {
 
   findOne(id: number) {
     return this.db.playlist.findUnique({
-      where: { id }
+      where: { id },
+      include: {
+        songs: true
+      }
     });
   }
 
