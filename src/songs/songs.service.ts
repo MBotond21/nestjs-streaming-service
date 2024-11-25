@@ -55,7 +55,7 @@ export class SongsService {
   }
 
   async findPopularArtists(){
-    return await this.db.song.groupBy({
+    return (await this.db.song.groupBy({
       by: ['artist'],
       _count: {
         title: true
@@ -65,6 +65,11 @@ export class SongsService {
           title: 'desc'
         }
       }
-    });
+    })).map((s) => {
+      return{
+        artist: s.artist,
+        numberOfSungs: s._count.title
+      }
+    })
   }
 }

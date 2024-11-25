@@ -12,10 +12,10 @@ export class PlaylistsController {
     return this.playlistsService.create(createPlaylistDto);
   }
 
-  @Get()
-  findAll() {
-    return this.playlistsService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.playlistsService.findAll();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

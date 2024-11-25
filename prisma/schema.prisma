@@ -19,14 +19,14 @@ model Song {
   artist String
   length Int
   price Int
-  rating Int
-  playlistId Int @unique
-  playlist Playlist @relation(fields: [playlistId], references: [id])
+  rating Float
 
+  playlists Playlist[]
 }
 
 model Playlist {
   id Int @id @default(autoincrement())
   name String
+
   songs Song[]
 }
